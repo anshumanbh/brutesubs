@@ -5,6 +5,7 @@ A framework for bruteforcing subdomains using multiple Open Sourced tools and ch
 
 ## Sample .env file
 
+```
 TARGETS=uber.com
 cewltmp=/data/cewl.txt
 cewlLOC=/opt/subscan/wordlists/cewlwordlist.txt
@@ -23,3 +24,4 @@ google_cse=<>
 shodan_api=<>
 
 finaloutput=/data/finaloutput.txt
+```
