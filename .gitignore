@@ -1,4 +1,5 @@
 # Byte-compiled / optimized / DLL files
+.DS_Store
 __pycache__/
 *.py[cod]
 *$py.class
@@ -87,3 +88,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Custom directories
+wordlistbackup/
+myoutdir/

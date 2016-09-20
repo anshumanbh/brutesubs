@@ -1,0 +1,14 @@
+FROM ubuntu:latest
+MAINTAINER Anshuman Bhartiya <anshuman.bhartiya@gmail.com>
+
+# Doing the usual here
+RUN apt-get -y update && \
+    apt-get -y dist-upgrade
+
+ RUN apt-get install -y tofrodos
+
+RUN mkdir /opt/secdevops
+COPY scripts/* /opt/secdevops/
+RUN chmod +x /opt/secdevops/*
+
+WORKDIR /opt/subscan

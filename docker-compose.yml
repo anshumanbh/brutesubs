@@ -1,0 +1,54 @@
+version: "2"
+services:
+    cewl:
+        build: ./cewl
+        container_name: cewl
+        env_file: .env
+        volumes:
+            - ./myoutdir:/data
+            - ./myoutdir/output:/data/output
+        command: cewl --depth 3 --w $cewltmp --offsite -v $TARGETS
+
+    gobuster:
+        build:
+            context: .
+            dockerfile: gobuster/Dockerfile
+        container_name: gobuster
+        env_file: .env
+        volumes:
+            - ./myoutdir:/data
+            - ./myoutdir/output:/data/output
+        command: /bin/sh /opt/secdevops/wait-for-cewl-start-gobuster.sh
+
+    enumall:
+        build:
+            context: .
+            dockerfile: enumall/Dockerfile
+        container_name: enumall
+        env_file: .env
+        volumes:
+            - ./myoutdir:/data
+            - ./myoutdir/output:/data/output
+        command: /bin/sh /opt/secdevops/wait-for-cewl-start-enumall.sh
+
+    sublist3r:
+        build:
+            context: .
+            dockerfile: sublist3r/Dockerfile
+        container_name: sublist3r
+        env_file: .env
+        volumes:
+            - ./myoutdir:/data
+            - ./myoutdir/output:/data/output
+        command: /bin/sh /opt/secdevops/wait-for-cewl-start-sublist3r.sh
+
+    endgame:
+        build:
+            context: .
+            dockerfile: endgame/Dockerfile
+        container_name: endgame
+        env_file: .env
+        volumes:
+            - ./myoutdir:/data
+            - ./myoutdir/output:/data/output
+        command: /bin/bash /opt/secdevops/wait-for-tools-end-game.sh
