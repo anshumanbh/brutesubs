@@ -1,6 +1,18 @@
 # brutesubs
 A framework for bruteforcing subdomains using multiple Open Sourced tools and choosing your own wordlists running in parallel via Docker
 
+## Getting Started
+
+You need docker. The versions I have running are:
+```
+Docker version 1.12.1, build 23cf638
+docker-compose version 1.8.0, build unknown
+```
+
+Once you have docker and docker-compose installed, go ahead and git clone this repo.
+```
+git clone https://github.com/anshumanbh/brutesubs.git
+```
 
 
 ## Sample .env file
