@@ -1,6 +1,8 @@
 # brutesubs
 An automation framework for running multiple open sourced subdomain bruteforcing tools (in parallel) using your own wordlists via Docker
 
+I have blogged about the idea behind this framework here - https://abhartiya.wordpress.com/2016/09/20/brutesubs-an-automation-framework-for-running-multiple-subdomain-bruteforcing-tools-in-parallel-via-docker/
+
 ## Getting Started
 
 You need docker. The versions I have running are:
@@ -111,10 +113,12 @@ When enumall finished, and GoBuster and Sublist3r had already finished earlier, 
 
 ## Future Ideas:
 
+* Further fine tune the subdomains bruteforced
 * Implement Alt-DNS on the subdomains generated
 * Implement assetnote to notify of newly identified subdomains
 * Implement port scanning, http screenshots, checking for hostile subdomains takeover type vulnerabilities
 * Implement Directory bruteforcing
+* Possibly extend the framework to include automation of more tools and such
 
 
 ## Troubleshooting:
