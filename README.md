@@ -1,5 +1,5 @@
 # brutesubs
-A framework for bruteforcing subdomains using multiple Open Sourced tools and choosing your own wordlists running in parallel via Docker
+An automation framework for running multiple open sourced subdomain bruteforcing tools (in parallel) using your own wordlists via Docker
 
 ## Getting Started
 
@@ -107,5 +107,18 @@ When Sublist3r finished running while Enumall is still running parallely:
 When enumall finished, and GoBuster and Sublist3r had already finished earlier, endgame kicked off and combined all the output into one merged output:
 
 ![endgame](/img/enumallendgame.png)
+
+
+## Future Ideas:
+
+* Implement Alt-DNS on the subdomains generated
+* Implement assetnote to notify of newly identified subdomains
+* Implement port scanning, http screenshots, checking for hostile subdomains takeover type vulnerabilities
+* Implement Directory bruteforcing
+
+
+## Troubleshooting:
+
+If the dockerfiles fail to build sometimes, just run it again. It happens mostly because of network connections, atleast for me. 
 
 
