@@ -84,6 +84,6 @@ The individual output from the tools will be stored at `./myoutdir/output/gobust
 
 And, finally, the bruteforced subdomain list after running all 3 tools will be stored at `./myoutdir/finaloutput.txt`
 
-Please make sure that you include all the wordlists you want to use in the `wordlists` folder before issuing `docker-compose build`. Also, please make sure you first delete the `myoutdir` directory every time you run `docker-compose up` or `docker-compose up -d` against a new target. 
+### Please make sure that you include all the wordlists you want to use in the `wordlists` folder before issuing `docker-compose build`. Also, please make sure you first delete the `myoutdir` directory every time you run `docker-compose up` or `docker-compose up -d` against a new target. 
 
 
