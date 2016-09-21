@@ -18,6 +18,8 @@ git clone https://github.com/anshumanbh/brutesubs.git
 
 Next, make sure you have the `.env` file setup in the same directory level where you have the `docker-compose.yml` file. I have provided a sample below. Set the `TARGETS` variable to whatever domain you want to target. You can leave the `cewltmp`, `cewlLOC`, `LOC`, `finalLOC`, `temp1`, `temp2`, `gobusterfile`, `enumallfile`, `sublist3rfile` and `finaloutput` variables as is since the scripts leverage those values. Unless you know what you're doing, changing these values might break everything. The only other variables apart from the `TARGETS` that you need to provide are `google_api`, `google_cse` and `shodan_api`. These keys are used in some modules implemented in Enumall. So, if you don't provide these, those modules wont run. Hence, no output from those modules. But, the overall automation would still work. 
 
+Please consult https://bitbucket.org/LaNMaSteR53/recon-ng/wiki/Usage%20Guide to find out how to obtain `google_api` and `google_cse`. You will need both the keys to use the `recon/domains-hosts/google_site_api` domain in recon-ng.
+
 Once you have the `.env` file set, make sure you have all the wordlists you want to use (apart from the wordlist generated from cewl) to bruteforce in the `wordlists` folder. 
 
 And, thats it! You are ready to go :-)
