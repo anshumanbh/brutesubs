@@ -42,13 +42,13 @@ services:
             - ./myoutdir/output:/data/output
         command: /bin/sh /opt/secdevops/wait-for-cewl-start-sublist3r.sh
 
-    endgame:
+    altdns:
         build:
             context: .
-            dockerfile: endgame/Dockerfile
-        container_name: endgame
+            dockerfile: altdns/Dockerfile
+        container_name: altdns
         env_file: .env
         volumes:
             - ./myoutdir:/data
             - ./myoutdir/output:/data/output
-        command: /bin/bash /opt/secdevops/wait-for-tools-end-game.sh
+        command: /bin/bash /opt/secdevops/wait-for-tools-run-altdns.sh
