@@ -7,7 +7,7 @@ services:
         volumes:
             - ./myoutdir:/data
             - ./myoutdir/output:/data/output
-        command: cewl --depth 3 --w $cewltmp --offsite -v $TARGETS
+        command: cewl --depth 2 --w $cewltmp --offsite -v $TARGETS
 
     gobuster:
         build:

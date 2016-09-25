@@ -144,8 +144,9 @@ When enumall finished, and GoBuster and Sublist3r had already finished earlier, 
 * cewl is flaky sometimes. It just won't run hence everything else waiting on it won't run either. You can troubleshoot this by checking a few things:
 	* Removing the docker images and rebuilding them again
 	* Running cewl standalone and seeing if it actually runs by itself or not
-	* change the cewl command in the docker-compose.yml file by decreasing the depth from 3 to 2 and see if that runs
+	* change the cewl command in the docker-compose.yml file by decreasing the depth from 2 to 1 and see if that runs
 	* I have had my AWS VPS IP blocked by Uber after running cewl a few times so thats a possibility as well. If that happens, cewl will not create any words and hence the entire automation will break
+	* Whatever it is, please make sure that before the cewl docker container exits, it says "Words Found" because only then the cewl wordlist will have a size >0 and the rest of the automation will proceed. If you don't see "Words Found" before the cewl container quits, that implies cewl did not successfully run, so stop all the containers. Figure out what the problem is and then start the environment again. I have reduced the cewl depth to 2 now so hopefully it should run in most cases. If not, just further reduce it to 1. 
 
 * The whole automation is slow right now just because of the number of words to bruteforce against. I will try to solve this by spawning more docker containers and splitting the wordlists. But, at this point, there is not much that can be done unfortunately. I have tried running it on AWS and it was surprisingly much much faster than running it locally. So, it is not that bad after all. 
 
