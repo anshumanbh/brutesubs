@@ -11,7 +11,7 @@ I have blogged about the idea behind this framework here - https://abhartiya.wor
 
 * The remaining containers (`gobuster`, `enumall`, `sublist3r` and `altdns`) will also start simultaneously but wait till the wordlist from cewl is generated. This is because we want to combine this wordlist from cewl with the other wordlists that we will be providing in the `wordlists` folder to create a big merged wordlist in the end to bruteforce against.
 
-* Once the wordlist from cewl is generated, it gets saved at `myoutdir/cewl.txt`. Then the `gobuster` container will kick in, it will combine that cewl wordlist with the other wordlists from the `wordlists` folder and save it at `myoutdir/subnames.txt` on the host. It will then start `gobuster` against the target with the merged wordlist (subnames.txt). The gobuster container runs gobuster with the following command: `$HOME/work/bin/gobuster -m dns -u $TARGETS -w $finalLOC -t 100 -fw`
+* Once the wordlist from cewl is generated, it gets saved at `myoutdir/cewl.txt`. Then the `gobuster` container will kick in, it will combine that cewl wordlist with the other wordlists from the `wordlists` folder and save it at `myoutdir/subnames.txt` on the host. This merging of different wordlists takes care of all the sorting and removing duplicate words from the final merged wordlist. It will then start `gobuster` against the target with the merged wordlist (subnames.txt). The gobuster container runs gobuster with the following command: `$HOME/work/bin/gobuster -m dns -u $TARGETS -w $finalLOC -t 100 -fw`
 
 * `enumall` and `sublist3r` containers will wait till the merged wordlist is created by the `gobuster` container. Once that merged wordlist exists, both `enumall` and `sublist3r` containers also kick in simultaneously starting off enumall and sublist3r against the target in their respective containers. The commands they are run with are:
 `/usr/bin/python /opt/subscan/Sublist3r/sublist3r.py -d $TARGETS -t 50 -v -o $sublist3rfile` and 
@@ -133,6 +133,7 @@ When enumall finished, and GoBuster and Sublist3r had already finished earlier, 
 * Implement Directory bruteforcing
 * Possibly extend the framework to include automation of more tools and such
 * Split big wordlists to be able to improve the speed
+* Notify new subdomains discovered by sending emails/SMS. Checking out assetnote for this
 
 
 
@@ -146,6 +147,6 @@ When enumall finished, and GoBuster and Sublist3r had already finished earlier, 
 	* change the cewl command in the docker-compose.yml file by decreasing the depth from 3 to 2 and see if that runs
 	* I have had my AWS VPS IP blocked by Uber after running cewl a few times so thats a possibility as well. If that happens, cewl will not create any words and hence the entire automation will break
 
-* This is a big problem I know. The whole automation is uber slow right now just because of the number of words to bruteforce against. I will try to solve this by spawning more docker containers and splitting the wordlists. But, at this point, there is not much that can be done unfortunately. 
+* The whole automation is slow right now just because of the number of words to bruteforce against. I will try to solve this by spawning more docker containers and splitting the wordlists. But, at this point, there is not much that can be done unfortunately. I have tried running it on AWS and it was surprisingly much much faster than running it locally. So, it is not that bad after all. 
 
 

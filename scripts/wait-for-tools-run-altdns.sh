@@ -35,7 +35,7 @@ if [ -f $gobusterfile ] && [ -f $enumallfile ] && [ -f $sublist3rfile ];
 
 		echo "Getting the resolved subdomains from the ALTDNS output and combining them with the previously obtained bruteforced subdomains"
 
-		TMP=echo $TARGETS | cut -d'.' -f 1
+		TMP=$(echo $TARGETS | cut -d'.' -f 1)
 
 		cat $altdnsoutput | cut -d':' -f 1 > $altdnsonlysubs
 		sort -u $finaloutput $altdnsonlysubs | grep $TMP > $finalandaltdns
