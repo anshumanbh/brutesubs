@@ -102,25 +102,10 @@ So on and so forth..I have also explained each environment variable in the `samp
 
 ## Some Screenshots from docker-compose logs
 
-When Cewl just finished running, Gobuster created a merged wordlist (using cewl's wordlist and all the wordlists provided in the wordlists folder), enumall picked it up and kicked off. Simultaneously, Sublist3r kicked off as well:
+When Cewl just finished running, Gobuster created a merged wordlist (using cewl's wordlist and all the wordlists provided in the wordlists folder), gobuster started running. Simultaneously, Enumall and Sublist3r kicked off as well. Meanwhile, Altdns is waiting for all containers to finish running.
 
 
-![All3](/img/cewlsublist3renumall.png)
-
-
-
-When Sublist3r finished running while Enumall is still running parallely:
-
-
-![All2](/img/sublist3renumall.png)
-
-
-
-
-When enumall finished, and GoBuster and Sublist3r had already finished earlier, endgame kicked off and combined all the output into one merged output:
-
-
-![endgame](/img/enumallendgame.png)
+![All](/img/gobuster_enumall_sublist3r_altdns.png)
 
 
 
