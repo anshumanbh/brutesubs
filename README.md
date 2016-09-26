@@ -4,6 +4,12 @@ An automation framework for running multiple open sourced subdomain bruteforcing
 I have blogged about the idea behind this framework here - https://abhartiya.wordpress.com/2016/09/20/brutesubs-an-automation-framework-for-running-multiple-subdomain-bruteforcing-tools-in-parallel-via-docker/. So, if you have a few mins and want to understand why this was needed, please feel free to read that blog. 
 
 
+
+## Pre-requisites
+Understanding how Docker works is really important to be able to use this framework so I suggest spending some time and getting used to Docker before actually using this. I won't be able to help with any docker related questions unfortunately.
+
+
+
 ## So, how does the automation work? 
 * I am using docker-compose to build separate images and start containers for those images. As of now, I have images for cewl, gobuster, enumall, sublist3r and altdns. I run these containers in a specific order hence the automation. I plan to include more tools and do more things than just bruteforce subdomains hence the framework. 
 
@@ -22,6 +28,7 @@ I have blogged about the idea behind this framework here - https://abhartiya.wor
 * Once all the 3 tools (gobuster, enumall and altdns) finish running (which might take time depending upon how big the subnames.txt file is), their individual outputs are saved at `myoutdir/output`. If you don't wait for all of them to finish and need some attack surface to begin with, you can start looking at the individual output generated at that location. Sublist3r will most likely finish first since we are not using its bruteforcing module.
 
 * After all the 3 tools finish running, the `altdns` container kicks in and runs altdns against the final output of the bruteforced subdomains. In the end, the altdns container will combine the results obtained from altdns, and the previously finished list of bruteforced subdomains and produce one final list of bruteforced subdomains that are valid and can be resolved. This is saved at `myoutdir` directory with the name `finalandaltdns.txt`. So, no false positives and hopefully no false negatives either after everything finishes.
+
  
 
 ## Getting Started
@@ -71,6 +78,7 @@ You can then always do a `docker ps -a` to view the containers that are running 
 ![Docker Containers](/img/dockerps.png)
 
 
+
 ## Some things to understand
 You will notice that as soon as you start the environment, a new folder called "myoutdir" gets created in the same directory structure. This is the folder where all the outputs will get stored. Please note that everytime you want to run this environment against a new target, you would need to delete this folder completely. This is because some scripts check for the existence of some files in this directory and if they are present, even from the old target, they would take that into consideration. So, please remove the "myoutdir" directory after every run.
 
@@ -94,10 +102,12 @@ The individual output from the tools will be stored at `./myoutdir/output/gobust
 So on and so forth..I have also explained each environment variable in the `sample-env` file just in case there is confusion. 
 
 
+
 ## NOTE/GOTCHAS
 * Please make sure that you include all the wordlists you want to use in the `wordlists` folder before issuing `docker-compose build`. 
 
 * Please make sure you first delete the `myoutdir` directory every time you run `docker-compose up` or `docker-compose up -d` against a new target. 
+
 
 
 ## Some Screenshots from docker-compose logs

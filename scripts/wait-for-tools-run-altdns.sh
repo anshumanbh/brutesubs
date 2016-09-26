@@ -15,6 +15,8 @@ if [ -f $gobusterfile ] && [ -f $enumallfile ] && [ -f $sublist3rfile ];
 		ln -s /usr/bin/fromdos /usr/bin/dos2unix
 		dos2unix $temp2
 		
+		# need to remove all subdomains from $temp2 that do not begin with 0-9 or a-z. the unicode chars, encoded chars, etc. break the resolver
+
 		echo "Making sure only valid subdomains exist in the final output by running resolve (github.com/majek/goplayground/resolve) "
 		cat $temp2 | $HOME/work/bin/resolve -server="$resolveserver" > $temp3
 		
