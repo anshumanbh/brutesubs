@@ -44,7 +44,7 @@ So, once you have that, go ahead and git clone this repo.
 git clone https://github.com/anshumanbh/brutesubs.git
 ```
 
-Next, make sure you have the `.env` file setup in the same directory level where you have the `docker-compose.yml` file. I have provided a sample (sample-env) along with this repo. Make sure you rename it to `.env` after you add the required environment variables. 
+Next, make sure you have the `.env` file setup in the same directory level where you have the `docker-compose.yml` file. I have provided a sample (sample-env) along with this repo. Make sure you rename it to `.env` after you add the required environment variables. Also, PLEASE REMOVE ALL THE COMMENTS FROM THE .ENV FILE. The tool will fail because it does not understand those comments. Those comments are there just to explain what each environment variable is for. 
 
 Set the `TARGETS` variable to whatever domain you want to target. You can leave the `cewltmp`, `cewlLOC`, `LOC`, `finalLOC`, `temp1`, `temp2`, `temp3`, `temp4`, `gobusterfile`, `enumallfile`, `sublist3rfile`, `finaloutput`, `altdnsoutput`, `altdnsonlysubs` and `finalandaltdns` variables as is since the scripts leverage those values. Unless you know what you're doing, changing these values might break everything. Feel free to change the `resolveserver` and `altdnsserver` values if you need to. The only other variables apart from the `TARGETS` that you need to provide are `google_api`, `google_cse` and `shodan_api`. These keys are used in some modules implemented in Enumall. So, if you don't provide these, those modules wont run. Hence, no output from those modules. But, the overall automation would still work. 
 
