@@ -19,4 +19,4 @@ fi
 echo "Running my own custom enumall script (https://raw.githubusercontent.com/anshumanbh/domain/master/enumall.py) using recon-ng"
 echo "For this, we are using the merged wordlist (W)"
 /usr/bin/python /opt/subscan/recon-ng/enumall.py -w $finalLOC $TARGETS
-echo "Saving the output to combine with the rest later"
+echo "Saving the Enumall output to combine with the rest later"

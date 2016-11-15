@@ -1,14 +1,5 @@
 version: "2"
 services:
-    cewl:
-        build: ./cewl
-        container_name: cewl
-        env_file: .env
-        volumes:
-            - ./myoutdir:/data
-            - ./myoutdir/output:/data/output
-        command: cewl --depth 2 --w $cewltmp --offsite -v $TARGETS
-
     gobuster:
         build:
             context: .
@@ -18,7 +9,7 @@ services:
         volumes:
             - ./myoutdir:/data
             - ./myoutdir/output:/data/output
-        command: /bin/sh /opt/secdevops/wait-for-cewl-start-gobuster.sh
+        command: /bin/sh /opt/secdevops/start-gobuster.sh
 
     enumall:
         build:
@@ -29,7 +20,7 @@ services:
         volumes:
             - ./myoutdir:/data
             - ./myoutdir/output:/data/output
-        command: /bin/sh /opt/secdevops/wait-for-cewl-start-enumall.sh
+        command: /bin/sh /opt/secdevops/start-enumall.sh
 
     sublist3r:
         build:
@@ -40,7 +31,7 @@ services:
         volumes:
             - ./myoutdir:/data
             - ./myoutdir/output:/data/output
-        command: /bin/sh /opt/secdevops/wait-for-cewl-start-sublist3r.sh
+        command: /bin/sh /opt/secdevops/start-sublist3r.sh
 
     altdns:
         build:
@@ -51,4 +42,4 @@ services:
         volumes:
             - ./myoutdir:/data
             - ./myoutdir/output:/data/output
-        command: /bin/bash /opt/secdevops/wait-for-tools-run-altdns.sh
+        command: /bin/bash /opt/secdevops/wait-for-tools-start-altdns.sh

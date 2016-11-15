@@ -26,13 +26,13 @@ if [ -f $gobusterfile ] && [ -f $enumallfile ] && [ -f $sublist3rfile ];
 				then echo $line >> $temp4
 			fi
 		done <$temp3
-		cat $temp4 | cut -d',' -f 1 | sort -u > $finaloutput
+		cat $temp4 | cut -d',' -f 1 | sort -u > $finaloutputbeforealtdns
 
 		rm $temp1 $temp2 $temp3 $temp4
 
 		echo "Running ALTDNS now on the final output of the bruteforced subdomains"
 		echo "The ALTDNS command used is altdns.py -i <finaloutput> -o data_output -w words.txt -r -e -d <altdnsserver> -s <altdnsoutputfile> -t 100"
-		/usr/bin/python /opt/subscan/altdns/altdns.py -i $finaloutput -o data_output -w words.txt -r -e -d $altdnsserver -s $altdnsoutput -t 100
+		/usr/bin/python /opt/subscan/altdns/altdns.py -i $finaloutputbeforealtdns -o data_output -w words.txt -r -e -d $altdnsserver -s $altdnsoutput -t 100
 		rm data_output
 
 		echo "Getting the resolved subdomains from the ALTDNS output and combining them with the previously obtained bruteforced subdomains"
@@ -40,7 +40,7 @@ if [ -f $gobusterfile ] && [ -f $enumallfile ] && [ -f $sublist3rfile ];
 		TMP=$(echo $TARGETS | cut -d'.' -f 1)
 
 		cat $altdnsoutput | cut -d':' -f 1 > $altdnsonlysubs
-		sort -u $finaloutput $altdnsonlysubs | grep $TMP > $finalandaltdns
+		sort -u $finaloutputbeforealtdns $altdnsonlysubs | grep $TMP > $finaloutputafteraltdns
 
 		# if running nmap, resolve all subdomains to their IP, sort IP, and run nmap against those unique IPs.
 		# keep track of what subdoamins are resolving to what IPs and what ports are open for a particular IP for posterity
