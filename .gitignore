@@ -90,5 +90,5 @@ ENV/
 .ropeproject
 
 # Custom directories
-wordlistbackup/
+wordlists-backup/
 myoutdir/

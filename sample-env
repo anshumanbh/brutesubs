@@ -1,4 +1,5 @@
 TARGETS=test.com    #target you want to run the framework against
+DIRNAME=test        #dirname inside myoutdir that you want all the files to be saved
 
 finalLOC=/data/subnames.txt		#final location of all wordlists after merging
 
