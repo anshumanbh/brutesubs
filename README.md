@@ -43,7 +43,7 @@ Set the `TARGETS` variable to whatever domain you want to target. You can leave 
 
 Please consult https://bitbucket.org/LaNMaSteR53/recon-ng/wiki/Usage%20Guide to find out how to obtain `google_api` and `google_cse`. You will need both the keys to use the `recon/domains-hosts/google_site_api` domain in recon-ng.
 
-Once you have the `.env` file set, make sure you have all the wordlists you want to use (apart from the wordlist generated from cewl because that will be generated once the cewl container is run) to bruteforce in the `wordlists` folder. I have provided some wordlists in the repo that I think should be pretty exhaustive but feel free to add/remove as necessary. 
+Once you have the `.env` file set, make sure you have all the wordlists you want to use to bruteforce in the `wordlists` folder. I have provided some wordlists in the repo that I think should be pretty exhaustive but feel free to add/remove as necessary. 
 
 And, thats it! You are ready to go :-)
 
@@ -90,7 +90,9 @@ The final merged wordlist after combining all the wordlists provided by you in t
 
 The individual output from the tools will be stored at `./myoutdir/output/gobusteroutput.txt`, `./myoutdir/output/enumalloutput.txt` and `./myoutdir/output/sublist3routput.txt`
 
-So on and so forth..I have also explained each environment variable in the `sample-env` file just in case there is confusion. 
+The final result from this orchestration will be stored at `./myoutdir/finalresult.txt`.
+
+I have also explained each environment variable in the `sample-env` file just in case there is confusion. 
 
 
 
