@@ -3,6 +3,7 @@ An automation framework for running multiple open sourced subdomain bruteforcing
 
 I have blogged about the idea behind this framework here - https://abhartiya.wordpress.com/2016/09/20/brutesubs-an-automation-framework-for-running-multiple-subdomain-bruteforcing-tools-in-parallel-via-docker/. So, if you have a few mins and want to understand why this was needed, please feel free to read that blog. 
 
+UPDATE: I removed `cewl` from this orchestration because it wasn't adding anything new/useful.
 
 
 ## Pre-requisites
