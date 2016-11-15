@@ -11,8 +11,6 @@ RUN mkdir /opt/secdevops && mkdir /opt/subscan && mkdir /opt/subscan/wordlists
 COPY scripts/* /opt/secdevops/
 RUN chmod +x /opt/secdevops/*
 
-COPY wordlists/* /opt/subscan/wordlists/
-
 WORKDIR /opt/subscan
 
 # Install GOLANG and GOBUSTER. The directory after github.com (subscan in this case) can be named to anything
@@ -29,5 +27,6 @@ RUN curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz && \
 	go get && go build && \
 	go install
 
-
+# Copying the wordlists in the end because every time you change a wordlist, the above commands are not being run again
+COPY wordlists/* /opt/subscan/wordlists/
 
