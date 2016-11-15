@@ -39,7 +39,7 @@ git clone https://github.com/anshumanbh/brutesubs.git
 
 Next, make sure you have the `.env` file setup in the same directory level where you have the `docker-compose.yml` file. I have provided a sample (sample-env) along with this repo. Make sure you rename it to `.env` after you add the required environment variables. Also, PLEASE REMOVE ALL THE COMMENTS FROM THE .ENV FILE. The tool will fail because it does not understand those comments. Those comments are there just to explain what each environment variable is for. 
 
-Set the `TARGETS` variable to whatever domain you want to target. You can leave the `finalLOC`, `temp1`, `temp2`, `temp3`, `temp4`, `gobusterfile`, `enumallfile`, `sublist3rfile`, `finaloutputbeforealtdns`, `altdnsoutput`, `altdnsonlysubs` and `finaloutputafteraltdns` variables as is since the scripts leverage those values. Unless you know what you're doing, changing these values might break everything. Feel free to change the `resolveserver` and `altdnsserver` values if you need to. The only other variables apart from the `TARGETS` that you need to provide are `google_api`, `google_cse` and `shodan_api`. These keys are used in some modules implemented in Enumall. So, if you don't provide these, those modules wont run. Hence, no output from those modules. But, the overall automation would still work. 
+Set the `TARGETS` variable to whatever domain you want to target. Set the `DIRNAME` variable to whatever directory you want the results to be saved inside the `myoutdir` directory. You can leave the `finalLOC`, `temp1`, `temp2`, `temp3`, `temp4`, `gobusterfile`, `enumallfile`, `sublist3rfile`, `finaloutputbeforealtdns`, `altdnsoutput`, `altdnsonlysubs` and `finaloutputafteraltdns` variables as is since the scripts leverage those values. Unless you know what you're doing, changing these values might break everything. Feel free to change the `resolveserver` and `altdnsserver` values if you need to. The only other variables apart from the `TARGETS` that you need to provide are `google_api`, `google_cse` and `shodan_api`. These keys are used in some modules implemented in Enumall. So, if you don't provide these, those modules wont run. Hence, no output from those modules. But, the overall automation would still work. 
 
 Please consult https://bitbucket.org/LaNMaSteR53/recon-ng/wiki/Usage%20Guide to find out how to obtain `google_api` and `google_cse`. You will need both the keys to use the `recon/domains-hosts/google_site_api` domain in recon-ng.
 
@@ -73,33 +73,31 @@ You can then always do a `docker ps -a` to view the containers that are running 
 
 
 ## Some things to understand
-You will notice that as soon as you start the environment, a new folder called "myoutdir" gets created in the same directory structure. This is the folder where all the outputs will get stored. Please note that everytime you want to run this environment against a new target, you would need to delete this folder completely. This is because some scripts check for the existence of some files in this directory and if they are present, even from the old target, they would take that into consideration. So, please remove the "myoutdir" directory after every run.
+You will notice that as soon as you start the environment, a new folder called "myoutdir/$DIRNAME" gets created in the same directory structure. This is the folder where all the outputs will get stored. 
 
-The `/data/` directory listed in the .env file above corresponds to this `/myoutdir` directory on your host that will get created when you start the environment. To understand this better, refer to the `docker-compose.yml` file and notice how I map the volumes for each container:
+The `/data/` directory listed in the .env file above corresponds to this `/myoutdir/$DIRNAME` directory on your host that will get created when you start the environment. To understand this better, refer to the `docker-compose.yml` file and notice how I map the volumes for each container:
 
 ```
 volumes:
-            - ./myoutdir:/data
-            - ./myoutdir/output:/data/output
+            - ./myoutdir/$DIRNAME:/data
+            - ./myoutdir/$DIRNAME/output:/data/output
 ```
 
-This part can be slightly confusing so please let me know if you have any questions. 
-Just remember that on your host, the directory structure is /myoutdir whereas on the docker containers, the directory structure is /data. All the output generated from the tools will be stored in their respective docker containers' /data directory which in turn is mapped to your /myoutdir host directory. Hence, you will see all output in the /myoutdir directory on your host. 
+This part can be slightly confusing so please let me know if you have any questions. `$DIRNAME` comes from the environment variable set in the .env file.
+Just remember that on your host, the directory structure is /myoutdir/$DIRNAME whereas on the docker containers, the directory structure is /data. All the output generated from the tools will be stored in their respective docker containers' /data directory which in turn is mapped to your /myoutdir/$DIRNAME host directory. Hence, you will see all output in the /myoutdir/$DIRNAME directory on your host. 
 
-The final merged wordlist after combining all the wordlists provided by you in the `wordlists` folder will be stored at `./myoutdir/subnames.txt`
+The final merged wordlist after combining all the wordlists provided by you in the `wordlists` folder will be stored at `./myoutdir/$DIRNAME/subnames.txt`
 
-The individual output from the tools will be stored at `./myoutdir/output/gobusteroutput.txt`, `./myoutdir/output/enumalloutput.txt` and `./myoutdir/output/sublist3routput.txt`
+The individual output from the tools will be stored at `./myoutdir/$DIRNAME/output/gobusteroutput.txt`, `./myoutdir/$DIRNAME/output/enumalloutput.txt` and `./myoutdir/$DIRNAME/output/sublist3routput.txt`
 
-The final result from this orchestration will be stored at `./myoutdir/finalresult.txt`.
+The final result from this orchestration will be stored at `./myoutdir/$DIRNAME/finalresult.txt`.
 
 I have also explained each environment variable in the `sample-env` file just in case there is confusion. 
 
 
 
 ## NOTE/GOTCHAS
-* Please make sure that you include all the wordlists you want to use in the `wordlists` folder before issuing `docker-compose build`. 
-
-* Please make sure you first delete the `myoutdir` directory every time you run `docker-compose up` or `docker-compose up -d` against a new target. 
+* Please make sure that you include all the wordlists you want to use in the `wordlists` folder, you set the `TARGETS` and `DIRNAME` environment variable correctly before issuing `docker-compose build`. 
 
 
 
