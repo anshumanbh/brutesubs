@@ -20,10 +20,7 @@ RUN apt-get install -y \
 
 RUN easy_install pip && pip install --upgrade pip
 
-RUN mkdir /opt/secdevops
-COPY scripts/* /opt/secdevops/
-RUN chmod +x /opt/secdevops/*
-
+RUN mkdir /opt/subscan
 WORKDIR /opt/subscan
 
 RUN git clone https://LaNMaSteR53@bitbucket.org/LaNMaSteR53/recon-ng.git
@@ -32,3 +29,7 @@ RUN git clone https://LaNMaSteR53@bitbucket.org/LaNMaSteR53/recon-ng.git
 WORKDIR /opt/subscan/recon-ng
 RUN pip install -r REQUIREMENTS && ln -s /opt/subscan/recon-ng /usr/share/recon-ng
 RUN wget https://raw.githubusercontent.com/anshumanbh/domain/master/enumall.py && chmod +x enumall.py
+
+RUN mkdir /opt/secdevops
+COPY scripts/* /opt/secdevops/
+RUN chmod +x /opt/secdevops/*

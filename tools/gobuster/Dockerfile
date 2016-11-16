@@ -7,10 +7,7 @@ RUN apt-get -y update && \
 
 RUN apt-get install -y curl git tofrodos
 
-RUN mkdir /opt/secdevops && mkdir /opt/subscan && mkdir /opt/subscan/wordlists 
-COPY scripts/* /opt/secdevops/
-RUN chmod +x /opt/secdevops/*
-
+RUN mkdir /opt/subscan && mkdir /opt/subscan/wordlists
 WORKDIR /opt/subscan
 
 # Install GOLANG and GOBUSTER. The directory after github.com (subscan in this case) can be named to anything
@@ -28,5 +25,7 @@ RUN curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz && \
 	go install
 
 # Copying the wordlists in the end because every time you change a wordlist, the above commands are not being run again
+RUN mkdir /opt/secdevops 
+COPY scripts/* /opt/secdevops/
 COPY wordlists/* /opt/subscan/wordlists/
-
+RUN chmod +x /opt/secdevops/*

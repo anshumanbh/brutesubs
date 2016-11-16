@@ -18,10 +18,11 @@ RUN apt-get install -y \
 	wget \
 	zlib1g-dev && apt-get clean
 
-RUN mkdir /opt/secdevops
-COPY scripts/* /opt/secdevops/
-RUN chmod +x /opt/secdevops/*
-
+RUN mkdir /opt/subscan
 WORKDIR /opt/subscan
 
 RUN git clone https://github.com/aboul3la/Sublist3r.git
+
+RUN mkdir /opt/secdevops
+COPY scripts/* /opt/secdevops/
+RUN chmod +x /opt/secdevops/*

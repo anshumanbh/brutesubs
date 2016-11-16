@@ -22,22 +22,22 @@ RUN apt-get install -y \
 
 RUN easy_install pip && pip install --upgrade pip
 
-RUN mkdir /opt/secdevops
-COPY scripts/* /opt/secdevops/
-RUN chmod +x /opt/secdevops/*
-
+RUN mkdir /opt/subscan
 WORKDIR /opt/subscan
 
-# Install GOLANG and RESOLVE. 
+# Install golang. 
 RUN curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz && \
 	tar -xvf go1.6.linux-amd64.tar.gz && \
 	mv go /usr/local && \
 	export PATH=$PATH:/usr/local/go/bin && \
 	mkdir $HOME/work && \
-	export GOPATH=$HOME/work && \ 
-	go get github.com/majek/goplayground/resolve
+	export GOPATH=$HOME/work 
 
 # Installing ALTDNS
 RUN git clone https://github.com/infosec-au/altdns.git
 WORKDIR /opt/subscan/altdns
 RUN pip install -r requirements.txt
+
+RUN mkdir /opt/secdevops
+COPY scripts/* /opt/secdevops/
+RUN chmod +x /opt/secdevops/*
