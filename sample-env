@@ -2,6 +2,9 @@ TARGETS=test.com    #target you want to run the framework against
 DIRNAME=test        #dirname inside myoutdir that you want all the files to be saved
 
 finalLOC=/data/subnames.txt		#final location of all wordlists after merging
+gobusterthreads=100             #threads to be used in gobuster
+sublist3rthreads=50             #threads to be used in sublist3r
+altdnsthreads=100               #threads to be used in altdns
 
 temp1=/data/output/temp1.txt    #temp1 file
 temp2=/data/output/temp2.txt	#temp2 file					
