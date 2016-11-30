@@ -9,7 +9,7 @@ services:
         volumes:
             - ./myoutdir/$DIRNAME:/data
             - ./myoutdir/$DIRNAME/output:/data/output
-        command: /bin/sh /opt/secdevops/start-gobuster.sh
+        command: /bin/bash /opt/secdevops/start-gobuster.sh
 
     enumall:
         build:

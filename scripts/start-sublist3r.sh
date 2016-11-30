@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 while [ ! -f $finalLOC ] ;
 do

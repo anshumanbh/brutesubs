@@ -1,8 +1,15 @@
-#/bin/sh
+#!/bin/bash
 
-echo "We have the wordlists provided by you in the wordlists folder so merging and sorting all the wordlists inside that folder to form one big wordlist (W) to bruteforce against"
+echo "We have the wordlists you want to use specified in the environment file so merging and sorting them to form one big wordlist (W) to bruteforce against"
 echo "Saving the final merged wordlist at /data/subnames.txt"
-sort -u /opt/subscan/wordlists/* > $temp1
+
+while IFS=',' read -ra ADDR; do
+      for i in "${ADDR[@]}"; do
+          c+=/opt/subscan/wordlists/$i" "
+      done
+done <<< $wordlists
+
+sort -u $c > $temp1
 tr '[:upper:]' '[:lower:]' < $temp1 > $temp2
 ln -s /usr/bin/fromdos /usr/bin/dos2unix
 dos2unix $temp2

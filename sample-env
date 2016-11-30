@@ -6,6 +6,8 @@ gobusterthreads=100             #threads to be used in gobuster
 sublist3rthreads=50             #threads to be used in sublist3r
 altdnsthreads=100               #threads to be used in altdns
 
+wordlists=wordlists=fierce_hostlist.txt,namelist.txt   #specify which wordlists you want to use from the wordlists folder. Also, you can add more wordlists to that folder and specify the name here
+
 temp1=/data/output/temp1.txt    #temp1 file
 temp2=/data/output/temp2.txt	#temp2 file					
 temp3=/data/output/temp3.txt	#temp3 file					
