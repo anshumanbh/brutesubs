@@ -14,7 +14,7 @@ Understanding how Docker works is really important to be able to use this framew
 ## So, how does the automation work? 
 * I am using docker-compose to build separate images and start containers for those images. As of now, I have images for gobuster, enumall, sublist3r and altdns. I run these containers in a specific order hence the automation. I plan to include more tools and do more things than just bruteforce subdomains hence the framework. 
 
-* To begin with, when you start the environment using `docker-compose`, the `gobuster` container will kick off. That will merge all the wordlists provided by you in the `wordlists` folder. The output of this merged wordlist is saved at `myoutdir/$DIRNAME/subnames.txt` on the host. It will then kick off Gobuster with that merged wordlist against the target mentioned in the `.env` file.
+* To begin with, when you start the environment using `docker-compose`, the `gobuster` container will kick off. That will merge all the wordlists mentioned in the .env file. Make sure these wordlists are provided by you in the `wordlists` folder. The output of this merged wordlist is saved at `myoutdir/$DIRNAME/subnames.txt` on the host. It will then kick off Gobuster with that merged wordlist against the target mentioned in the `.env` file.
 
 * The remaining containers (`enumall`, `sublist3r` and `altdns`) will also start simultaneously. However, out of these 3, the `enumall` and `sublist3r` containers will wait till the merged wordlist is generated above. This should be pretty quick. So, as soon as that merged wordlist is generated, Enumall and Sublist3r is kicked off as well with the merged wordlist against the target in their respective containers. `altdns` container will keep running and wait till all the above 3 tools finish running. 
 
@@ -39,11 +39,9 @@ git clone https://github.com/anshumanbh/brutesubs.git
 
 Next, make sure you have the `.env` file setup in the same directory level where you have the `docker-compose.yml` file. I have provided a sample (sample-env) along with this repo. Make sure you rename it to `.env` after you add the required environment variables. Also, PLEASE REMOVE ALL THE COMMENTS FROM THE .ENV FILE. The tool will fail because it does not understand those comments. Those comments are there just to explain what each environment variable is for. 
 
-Set the `TARGETS` variable to whatever domain you want to target. Set the `DIRNAME` variable to whatever directory you want the results to be saved inside the myoutdir directory. You can leave the `finalLOC`, `temp1`, `temp2`, `temp3`, `temp4`, `gobusterfile`, `enumallfile`, `sublist3rfile`, `finaloutputbeforealtdns`, `altdnsoutput`, `altdnsonlysubs` and `finaloutputafteraltdns` variables as is since the scripts leverage those values. Unless you know what you're doing, changing these values might break everything. Feel free to change the `resolveserver` and `altdnsserver` values if you need to. The only other variables apart from the `TARGETS` that you need to provide are `google_api`, `google_cse` and `shodan_api`. These keys are used in some modules implemented in Enumall. So, if you don't provide these, those modules wont run. Hence, no output from those modules. But, the overall automation would still work. 
-
 Please consult https://bitbucket.org/LaNMaSteR53/recon-ng/wiki/Usage%20Guide to find out how to obtain `google_api` and `google_cse`. You will need both the keys to use the `recon/domains-hosts/google_site_api` domain in recon-ng.
 
-Once you have the `.env` file set, make sure you have all the wordlists you want to use to bruteforce in the `wordlists` folder. I have provided some wordlists in the repo that I think should be pretty exhaustive but feel free to add/remove as necessary. 
+Once you have the `.env` file set, make sure you have all the wordlists you want to use (mentioned in the .env file) to bruteforce in the `wordlists` folder. I have provided some wordlists in the repo that I think should be pretty exhaustive but feel free to add/remove as necessary. 
 
 And, thats it! You are ready to go :-)
 
@@ -97,7 +95,7 @@ I have also explained each environment variable in the `sample-env` file just in
 
 
 ## NOTE/GOTCHAS
-* Please make sure that you include all the wordlists you want to use in the `wordlists` folder, you set the `TARGETS` and `DIRNAME` environment variable correctly before issuing `docker-compose build`. 
+* Please make sure that you include all the wordlists you want to use in the `wordlists` folder and specify which ones you want to use in the `wordlists` environment variable, you set the `TARGETS` and `DIRNAME` environment variable correctly before issuing `docker-compose build`. 
 
 
 
