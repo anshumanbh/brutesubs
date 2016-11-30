@@ -11,7 +11,6 @@ wordlists=wordlists=fierce_hostlist.txt,namelist.txt   #specify which wordlists 
 temp1=/data/output/temp1.txt    #temp1 file
 temp2=/data/output/temp2.txt	#temp2 file					
 temp3=/data/output/temp3.txt	#temp3 file					
-temp4=/data/output/temp4.txt	#temp4 file	
 
 gobusterfile=/data/output/gobusteroutput.txt		#gobuster output gets saved here
 enumallfile=/data/output/enumalloutput.txt			#enumall output gets saved here

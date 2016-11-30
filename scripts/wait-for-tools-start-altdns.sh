@@ -16,28 +16,23 @@ if [ -f $gobusterfile ] && [ -f $enumallfile ] && [ -f $sublist3rfile ];
 		dos2unix $temp2
 		
 		echo "Making sure only valid subdomains exist in the final output by running isresolveable.go file from the scripts directory"
-		# cat $temp2 | $HOME/work/bin/resolve -server="$resolveserver" > $temp3
+		#for domains that cannot be resolved, it just prints a blank line
 		/usr/local/go/bin/go run /opt/secdevops/isresolveable.go $temp2 > $temp3
 
-		while read line; do
-			STR="$(echo $line | cut -d',' -f 2)"
-			if [[ ! -z "${STR// }"  ]]
-				then echo $line >> $temp4
-			fi
-		done <$temp3
-		cat $temp4 | cut -d',' -f 1 | sort -u > $finaloutputbeforealtdns
+		echo "Sorting the domains, removing blank lines, grepping to make sure it only contains domains related to the target"
+		cat $temp3 | sort -u | grep $TARGETS > $finaloutputbeforealtdns
 
-		rm $temp1 $temp2 $temp3 $temp4
+		rm $temp1 $temp2 $temp3
 
-		echo "Running ALTDNS now on the final output of the bruteforced subdomains"
+		echo "Now, running ALTDNS on the bruteforced subdomains obtained above"
 		echo "The ALTDNS command used is altdns.py -i <finaloutput> -o data_output -w words.txt -r -e -d <altdnsserver> -s <altdnsoutputfile> -t $altdnsthreads"
 		/usr/bin/python /opt/subscan/altdns/altdns.py -i $finaloutputbeforealtdns -o data_output -w words.txt -r -e -d $altdnsserver -s $altdnsoutput -t $altdnsthreads
 		rm data_output
 
-		echo "Getting the resolved subdomains from the ALTDNS output and combining them with the previously obtained bruteforced subdomains"
-
+		#Assigning the target domain name to a TMP variable to be able to grep it later
 		TMP=$(echo $TARGETS | cut -d'.' -f 1)
 
+		echo "Getting the resolved subdomains from the ALTDNS output and combining them with the previously obtained bruteforced subdomains"
 		cat $altdnsoutput | cut -d':' -f 1 > $altdnsonlysubs
 		sort -u $finaloutputbeforealtdns $altdnsonlysubs | grep $TMP > $finaloutputafteraltdns
 
