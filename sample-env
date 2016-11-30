@@ -20,8 +20,7 @@ sublist3rfile=/data/output/sublist3routput.txt		#sublist3r output gets saved her
 google_api=<>				#ADD YOUR KEY		
 google_cse=<>		        #ADD YOUR KEY
 shodan_api=<>				#ADD YOUR KEY					
-
-resolveserver=8.8.8.8:53	#DNS server to resolve						
+				
 altdnsserver=8.8.8.8		#DNS server for altdns to resolve						
 
 finaloutputbeforealtdns=/data/finaloutputbeforealtdns.txt			#final output of bruteforced subdomains before running altdns		
