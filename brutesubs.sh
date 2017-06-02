@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-    echo "No arguments provided. PLease provide a domain followed by an output directory like so:"
+    echo "No arguments provided. Please provide a domain followed by an output directory like so:"
     echo "./brutesubs tesla.com tesla_output"
     exit 1
 fi
