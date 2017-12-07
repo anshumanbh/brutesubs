@@ -1,6 +1,6 @@
 # brutesubs
 
-NOTE - This tool is not being developed or supporte anymore. You are free to take the code and do whatever you want to do with it but I am not going to work on this anymore. I have a better version of this which I use but is not open sourced. 
+NOTE - This tool is not being developed or supported anymore. You are free to take the code and do whatever you want to do with it but I am not going to work on this anymore. I have a better version of this which I use but is not open sourced. 
 
 An automation framework for running multiple open sourced subdomain bruteforcing tools (in parallel) using your own wordlists via Docker. If you are not familiar with Docker, I highly recommend you familiarize yourself first. 
 
