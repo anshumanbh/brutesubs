@@ -42,7 +42,7 @@ git clone https://github.com/anshumanbh/brutesubs.git
 
 Next, make sure you have the `.env` file setup in the same directory level where you have the `docker-compose.yml` file. I have provided a sample (sample-env) along with this repo. Make sure you rename it to `.env` after you add the required environment variables. Also, PLEASE REMOVE ALL THE COMMENTS FROM THE .ENV FILE. The tool will fail because it does not understand those comments. Those comments are there just to explain what each environment variable is for. 
 
-Please consult https://bitbucket.org/LaNMaSteR53/recon-ng/wiki/Usage%20Guide to find out how to obtain `google_api` and `google_cse`. You will need both the keys to use the `recon/domains-hosts/google_site_api` domain in recon-ng.
+Please consult https://github.com/lanmaster53/recon-ng-marketplace/wiki/API-Keys to find out how to obtain `google_api` and `google_cse`. You will need both the keys to use the `recon/domains-hosts/google_site_api` domain in recon-ng.
 
 Once you have the `.env` file set, make sure you have all the wordlists you want to use (mentioned in the .env file) to bruteforce in the `wordlists` folder. I have provided some wordlists in the repo that I think should be pretty exhaustive but feel free to add/remove as necessary. 
 
