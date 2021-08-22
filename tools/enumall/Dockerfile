@@ -23,7 +23,7 @@ RUN easy_install pip && pip install --upgrade pip
 RUN mkdir /opt/subscan
 WORKDIR /opt/subscan
 
-RUN git clone https://LaNMaSteR53@bitbucket.org/LaNMaSteR53/recon-ng.git
+RUN git clone https://github.com/lanmaster53/recon-ng.git
 
 # Changing the cwd from /opt/subscan to /opt/subscan/recon-ng. Installing recon-ng, Downloading the custom enumall script and making it executable
 WORKDIR /opt/subscan/recon-ng
